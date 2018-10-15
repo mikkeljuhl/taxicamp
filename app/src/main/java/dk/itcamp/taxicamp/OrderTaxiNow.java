@@ -19,81 +19,68 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import dk.itcamp.taxicamp.listeners.ViewInfoAboutTaxiDistanceOnClickListener;
 import dk.itcamp.taxicamp.standard.LocationTracker;
+import dk.itcamp.taxicamp.standard.LocationUtility;
 import dk.itcamp.taxicamp.standard.Singleton;
-import dk.itcamp.taxicamp.standard.Taxi;
+import dk.itcamp.taxicamp.standard.TaxiUtility;
 
 public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallback {
-
-    private GoogleMap googleMap;
-    private Taxi closestTaxi = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_taxi_now);
+        setContentView(R.layout.ACTIVITY_ORDER_TAXI_NOW);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
     }
 
-    private void initializeTaxis(GoogleMap googleMap) {
-        Singleton.getInstance().taxis.add(newTaxi("Taxi Driver 1", googleMap));
-    }
-
-    private Taxi newTaxi(String name, GoogleMap googleMap) {
-        Location location = new Location(name);
-        location.setLongitude(-122.083);
-        location.setLatitude(37.421);
-        return new Taxi(name, location, googleMap);
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
+        Singleton.getInstance().googleMap = googleMap;
+        this.ensurePermissionsAreOK();
+        TaxiUtility.initializeTaxis();
+        this.initializeAndReturnCurrentLocation();
+        this.addCurrentLocationToMap();
+        this.zoomAccordingToLocation(LocationUtility.locationToLatLng(Singleton.getInstance().currentLocation));
+        this.addOnClickListenerForFloatingActionButton();
+    }
 
-        this.initializeTaxis(this.googleMap);
+    private Location initializeAndReturnCurrentLocation() {
+        LocationTracker locationTracker = new LocationTracker(getApplicationContext(), Singleton.getInstance().googleMap);
+        Singleton.getInstance().currentLocation = locationTracker.getCurrentLocation();
+        return Singleton.getInstance().currentLocation;
+    }
 
+    private void addCurrentLocationToMap() {
+        LatLng currentLocation = new LatLng(Singleton.getInstance().currentLocation.getLatitude(), Singleton.getInstance().currentLocation.getLongitude());
+        Singleton.getInstance().googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current location"));
+    }
+
+    private void ensurePermissionsAreOK() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            googleMap.setMyLocationEnabled(true);
+            Singleton.getInstance().googleMap.setMyLocationEnabled(true);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
+    }
 
-        LocationTracker locationTracker = new LocationTracker(getApplicationContext(), this.googleMap);
-        Location location = locationTracker.getCurrentLocation();
-        Singleton.getInstance().currentLocation = location;
-
-        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-        this.googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current location"));
-
-        this.zoomAccordingToLocation(currentLocation);
-        this.closestTaxi = this.findClosestTaxi();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new ViewInfoAboutTaxiDistanceOnClickListener(this.closestTaxi, Singleton.getInstance().currentLocation));
+    private void addOnClickListenerForFloatingActionButton() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new ViewInfoAboutTaxiDistanceOnClickListener(TaxiUtility.findClosestTaxi(), Singleton.getInstance().currentLocation));
     }
 
     private void zoomAccordingToLocation(LatLng location) {
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        GoogleMap googleMap = Singleton.getInstance().googleMap;
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
         CameraPosition cameraPosition = new CameraPosition.Builder().target(location).zoom(14).build();
-        this.googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
-
-    private Taxi findClosestTaxi() {
-        Taxi closestTaxi = null;
-        Location currentLocation = Singleton.getInstance().currentLocation;
-
-        for (Taxi taxi : Singleton.getInstance().taxis) {
-            if (closestTaxi == null) { closestTaxi = taxi; }
-
-            if (currentLocation.distanceTo(taxi.getLocation()) < currentLocation.distanceTo(closestTaxi.getLocation())) {
-                closestTaxi = taxi;
-            }
-        }
-
-        return closestTaxi;
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
 
