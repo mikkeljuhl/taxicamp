@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">taxicamp</string>
+    <string name="title_activity_order_taxi">OrderTaxi</string>
+</resources>
