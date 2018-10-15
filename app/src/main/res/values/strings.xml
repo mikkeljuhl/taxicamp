@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">taxicamp</string>
     <string name="title_activity_order_taxi">OrderTaxi</string>
+    <string name="title_activity_order_taxi_now">order_taxi_now</string>
 </resources>
