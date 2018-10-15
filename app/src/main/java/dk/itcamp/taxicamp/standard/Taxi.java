@@ -39,6 +39,6 @@ public class Taxi {
 
     public void setLocation(Location location) {
         this.location = location;
-        this.marker.setPosition(new LatLng(this.location.getLatitude(), this.location.getLongitude()));
+        this.marker.setPosition(LocationUtility.locationToLatLng(this.location));
     }
 }

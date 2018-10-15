@@ -28,7 +28,7 @@ public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ACTIVITY_ORDER_TAXI_NOW);
+        setContentView(R.layout.activity_order_taxi_now);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,7 +47,7 @@ public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallbac
         TaxiUtility.initializeTaxis();
         this.initializeAndReturnCurrentLocation();
         this.addCurrentLocationToMap();
-        this.zoomAccordingToLocation(LocationUtility.locationToLatLng(Singleton.getInstance().currentLocation));
+        this.zoomAccordingToLocation();
         this.addOnClickListenerForFloatingActionButton();
     }
 
@@ -72,15 +72,21 @@ public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallbac
 
     private void addOnClickListenerForFloatingActionButton() {
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new ViewInfoAboutTaxiDistanceOnClickListener(TaxiUtility.findClosestTaxi(), Singleton.getInstance().currentLocation));
+        fab.setOnClickListener(new ViewInfoAboutTaxiDistanceOnClickListener(OrderTaxiNow.this, TaxiUtility.findClosestTaxi(), Singleton.getInstance().currentLocation));
     }
 
-    private void zoomAccordingToLocation(LatLng location) {
-        GoogleMap googleMap = Singleton.getInstance().googleMap;
+    private void zoomAccordingToLocation() {
+        this.runOnUiThread(new Runnable(){
+            public void run() {
+                GoogleMap googleMap = Singleton.getInstance().googleMap;
+                Location currentLocation = Singleton.getInstance().currentLocation;
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(location).zoom(14).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LocationUtility.locationToLatLng(currentLocation)));
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(LocationUtility.locationToLatLng(currentLocation)).zoom(14).build();
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        });
+
     }
 }
 
