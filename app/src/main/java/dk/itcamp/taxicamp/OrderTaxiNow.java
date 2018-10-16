@@ -19,9 +19,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import dk.itcamp.taxicamp.listeners.ViewInfoAboutTaxiDistanceOnClickListener;
 import dk.itcamp.taxicamp.standard.LocationTracker;
-import dk.itcamp.taxicamp.standard.LocationUtility;
+import dk.itcamp.taxicamp.utility.LocationUtility;
 import dk.itcamp.taxicamp.standard.Singleton;
-import dk.itcamp.taxicamp.standard.TaxiUtility;
+import dk.itcamp.taxicamp.utility.TaxiUtility;
 
 public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -74,7 +74,7 @@ public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallbac
 
     private void addOnClickListenerForFloatingActionButton() {
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new ViewInfoAboutTaxiDistanceOnClickListener(OrderTaxiNow.this, TaxiUtility.findClosestTaxi(), Singleton.getInstance().currentLocation));
+        fab.setOnClickListener(new ViewInfoAboutTaxiDistanceOnClickListener(OrderTaxiNow.this));
     }
 
     private void zoomAccordingToLocation() {

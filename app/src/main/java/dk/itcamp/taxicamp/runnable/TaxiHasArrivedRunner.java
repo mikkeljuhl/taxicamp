@@ -4,11 +4,11 @@ import android.view.View;
 import android.widget.Toast;
 
 
-public class TaxiHasArrived implements Runnable {
+public class TaxiHasArrivedRunner implements Runnable {
 
     private View view;
 
-    public TaxiHasArrived(View view) {
+    public TaxiHasArrivedRunner(View view) {
         this.view = view;
     }
 

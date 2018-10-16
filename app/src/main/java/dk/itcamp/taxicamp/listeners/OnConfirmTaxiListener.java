@@ -9,10 +9,10 @@ import android.widget.Toast;
 
 import java.math.*;
 
-import dk.itcamp.taxicamp.runnable.TaxiHasArrived;
+import dk.itcamp.taxicamp.runnable.TaxiHasArrivedRunner;
 import dk.itcamp.taxicamp.standard.Singleton;
 import dk.itcamp.taxicamp.standard.Taxi;
-import dk.itcamp.taxicamp.standard.TaxiRunner;
+import dk.itcamp.taxicamp.runnable.TaxiRunner;
 
 public class OnConfirmTaxiListener implements DialogInterface.OnClickListener {
     private View view;
@@ -61,7 +61,7 @@ public class OnConfirmTaxiListener implements DialogInterface.OnClickListener {
             handler.postDelayed(new TaxiRunner(this.taxi), i * OnConfirmTaxiListener.SPEED_OF_TAXI);
         }
 
-        handler.postDelayed(new TaxiHasArrived(this.view), (loops + 1) * OnConfirmTaxiListener.SPEED_OF_TAXI);
+        handler.postDelayed(new TaxiHasArrivedRunner(this.view), (loops + 1) * OnConfirmTaxiListener.SPEED_OF_TAXI);
     }
 
     public int findAmountOfLoops(BigDecimal difference) {

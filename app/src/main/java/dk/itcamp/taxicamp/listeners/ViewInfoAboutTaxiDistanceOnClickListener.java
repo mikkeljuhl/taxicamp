@@ -5,28 +5,28 @@ import android.location.Location;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
 
-import dk.itcamp.taxicamp.standard.Taxi;
+import dk.itcamp.taxicamp.standard.Singleton;
+import dk.itcamp.taxicamp.utility.TaxiUtility;
 
 public class ViewInfoAboutTaxiDistanceOnClickListener implements View.OnClickListener {
-
-    private String distanceToTaxi;
-    private Taxi taxi;
     private Activity activity;
 
-
-    public ViewInfoAboutTaxiDistanceOnClickListener(Activity activity, Taxi taxi, Location currentLocation) {
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-        this.distanceToTaxi = df.format(taxi.getLocation().distanceTo(currentLocation) / 1000);
-        this.taxi = taxi;
+    public ViewInfoAboutTaxiDistanceOnClickListener(Activity activity) {
         this.activity = activity;
     }
 
     @Override
     public void onClick(View v) {
-        Snackbar.make(v, "Den taxi der er tættest på er " + this.distanceToTaxi + " km væk", Snackbar.LENGTH_LONG)
-                .setAction("Bestil Taxi", new OrderTaxiOnClickListener(activity, taxi)).show();
+        Snackbar.make(v, this.textForClosestTaxi(), Snackbar.LENGTH_LONG)
+                .setAction("Bestil Taxi", new OrderTaxiOnClickListener(activity, TaxiUtility.findClosestTaxi())).show();
+    }
+
+    private String textForClosestTaxi() {
+        Location currentLocation = Singleton.getInstance().currentLocation;
+        BigDecimal distanceToTaxi  = BigDecimal.valueOf(TaxiUtility.findClosestTaxi().getLocation().distanceTo(currentLocation) / 1000);
+
+        return "Den taxi der er tættest på er " + distanceToTaxi.setScale(2, BigDecimal.ROUND_FLOOR) + " km væk";
     }
 }

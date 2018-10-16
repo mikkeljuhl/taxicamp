@@ -1,6 +1,9 @@
-package dk.itcamp.taxicamp.standard;
+package dk.itcamp.taxicamp.utility;
 
 import android.location.Location;
+
+import dk.itcamp.taxicamp.standard.Singleton;
+import dk.itcamp.taxicamp.standard.Taxi;
 
 
 public class TaxiUtility {
@@ -17,6 +20,7 @@ public class TaxiUtility {
             }
         }
 
+        System.out.println(closestTaxi.getLocation().getLongitude());
         return closestTaxi;
     }
 

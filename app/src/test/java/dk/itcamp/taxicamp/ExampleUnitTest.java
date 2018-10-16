@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import dk.itcamp.taxicamp.listeners.OnConfirmTaxiListener;
-import dk.itcamp.taxicamp.standard.TaxiRunner;
+import dk.itcamp.taxicamp.runnable.TaxiRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;

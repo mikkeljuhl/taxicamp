@@ -7,6 +7,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import dk.itcamp.taxicamp.utility.LocationUtility;
+
 public class Taxi {
     private String driverName;
     private Location location;

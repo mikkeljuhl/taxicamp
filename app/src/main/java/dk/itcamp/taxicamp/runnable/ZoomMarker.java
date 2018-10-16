@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import dk.itcamp.taxicamp.standard.LocationUtility;
+import dk.itcamp.taxicamp.utility.LocationUtility;
 import dk.itcamp.taxicamp.standard.Singleton;
 
 public class ZoomMarker implements Runnable {

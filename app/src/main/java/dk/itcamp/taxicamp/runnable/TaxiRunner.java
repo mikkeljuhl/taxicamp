@@ -1,9 +1,12 @@
-package dk.itcamp.taxicamp.standard;
+package dk.itcamp.taxicamp.runnable;
 
 import android.location.Location;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+
+import dk.itcamp.taxicamp.standard.Singleton;
+import dk.itcamp.taxicamp.standard.Taxi;
 
 public class TaxiRunner implements Runnable {
 

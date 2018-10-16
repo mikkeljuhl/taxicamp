@@ -1,4 +1,4 @@
-package dk.itcamp.taxicamp.standard;
+package dk.itcamp.taxicamp.utility;
 
 import android.location.Location;
 
