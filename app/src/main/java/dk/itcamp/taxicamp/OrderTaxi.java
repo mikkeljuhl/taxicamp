@@ -14,10 +14,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import dk.itcamp.taxicamp.runnable.ZoomMarker;
 import dk.itcamp.taxicamp.standard.LocationTracker;
+import dk.itcamp.taxicamp.standard.LocationUtility;
+import dk.itcamp.taxicamp.standard.Singleton;
 
 public class OrderTaxi extends FragmentActivity implements OnMapReadyCallback {
 
@@ -67,10 +71,8 @@ public class OrderTaxi extends FragmentActivity implements OnMapReadyCallback {
         }
 
         LocationTracker locationTracker = new LocationTracker(getApplicationContext(), this.googleMap);
-        Location location = locationTracker.getCurrentLocation();
+        Singleton.getInstance().currentLocation = locationTracker.getCurrentLocation();
 
-        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-        this.googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current location"));
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+        this.runOnUiThread(new ZoomMarker(this.googleMap));
     }
 }

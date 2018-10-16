@@ -52,8 +52,10 @@ public class OrderTaxiNow extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private Location initializeAndReturnCurrentLocation() {
-        LocationTracker locationTracker = new LocationTracker(getApplicationContext(), Singleton.getInstance().googleMap);
-        Singleton.getInstance().currentLocation = locationTracker.getCurrentLocation();
+        if (Singleton.getInstance().currentLocation == null) {
+            LocationTracker locationTracker = new LocationTracker(getApplicationContext(), Singleton.getInstance().googleMap);
+            Singleton.getInstance().currentLocation = locationTracker.getCurrentLocation();
+        }
         return Singleton.getInstance().currentLocation;
     }
 

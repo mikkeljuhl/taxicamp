@@ -26,8 +26,8 @@ public class TaxiUtility {
 
     private static Taxi newTaxi(String name) {
         Location location = new Location(name);
-        location.setLongitude(-122.083);
-        location.setLatitude(37.421);
+        location.setLongitude(-122.043);
+        location.setLatitude(37.411);
         return new Taxi(name, location, Singleton.getInstance().googleMap);
     }
 }
