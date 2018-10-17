@@ -25,13 +25,13 @@ public class TaxiUtility {
     }
 
     public static void initializeTaxis() {
-        Singleton.getInstance().taxis.add(newTaxi("Taxi Driver 1"));
+        Singleton.getInstance().taxis.add(newTaxi("Taxi Driver 1", -122.043, 37.411));
     }
 
-    private static Taxi newTaxi(String name) {
+    private static Taxi newTaxi(String name, double longitude, double latitude) {
         Location location = new Location(name);
-        location.setLongitude(-122.043);
-        location.setLatitude(37.411);
+        location.setLongitude(longitude);
+        location.setLatitude(latitude);
         return new Taxi(name, location, Singleton.getInstance().googleMap);
     }
 }
