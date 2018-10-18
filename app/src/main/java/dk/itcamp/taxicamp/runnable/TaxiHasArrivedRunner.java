@@ -13,7 +13,7 @@ public class TaxiHasArrivedRunner implements Runnable {
     }
 
     private String taxiIsWaitingForYouMessage() {
-        return "Din taxi venter på dig nu.";
+        return "Kom ud og mød din taxi nu!";
     }
 
     @Override
