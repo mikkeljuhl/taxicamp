@@ -29,8 +29,9 @@ public class TaxiUtility {
     public static void initializeTaxis() {
         ArrayList<Taxi> listOfTaxis = new ArrayList<>();
 
-        listOfTaxis.add(newTaxi("Taxi Driver 1", -122.043, 37.411));
-        listOfTaxis.add(newTaxi("Taxi Driver 2", -122.043, 37.420));
+        listOfTaxis.add(newTaxi("Earl Sweatshirt", -122.123, 37.411));
+        listOfTaxis.add(newTaxi("Skepta", -122.14, 37.410));
+        listOfTaxis.add(newTaxi("Frank Ocean", -122.100, 37.421));
 
         Singleton.getInstance().taxis.addAll(listOfTaxis);
     }
