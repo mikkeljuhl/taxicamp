@@ -34,7 +34,7 @@ public class ViewInfoAboutTaxiDistanceOnClickListener implements View.OnClickLis
     private BigDecimal getDistanceToTaxi() {
         Location currentLocation = Singleton.getInstance().currentLocation;
         BigDecimal distanceToTaxi  = BigDecimal.valueOf(TaxiUtility.findClosestTaxi().getLocation().distanceTo(currentLocation) / 1000);
-        return distanceToTaxi.setScale(2, BigDecimal.ROUND_FLOOR)
+        return distanceToTaxi.setScale(2, BigDecimal.ROUND_FLOOR);
     }
 
 }
