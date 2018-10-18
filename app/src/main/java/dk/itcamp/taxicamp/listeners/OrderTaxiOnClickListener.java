@@ -18,11 +18,11 @@ public class OrderTaxiOnClickListener implements View.OnClickListener  {
     }
 
     private String titleForAlertDialog() {
-        return "Vil du gerne bestille en taxi?";
+        return "Er du sikker på at du gerne vil bestille en taxi?";
     }
 
     private String messageForAlertDialog() {
-        return "Er du sikker på du vil bestille en taxi?";
+        return "Er du helt sikker?";
     }
 
     @Override
