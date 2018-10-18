@@ -2,6 +2,8 @@ package dk.itcamp.taxicamp.utility;
 
 import android.location.Location;
 
+import java.util.ArrayList;
+
 import dk.itcamp.taxicamp.standard.Singleton;
 import dk.itcamp.taxicamp.standard.Taxi;
 
@@ -25,7 +27,12 @@ public class TaxiUtility {
     }
 
     public static void initializeTaxis() {
-        Singleton.getInstance().taxis.add(newTaxi("Taxi Driver 1", -122.043, 37.411));
+        ArrayList<Taxi> listOfTaxis = new ArrayList<>();
+
+        listOfTaxis.add(newTaxi("Taxi Driver 1", -122.043, 37.411));
+        listOfTaxis.add(newTaxi("Taxi Driver 2", -122.043, 37.420));
+
+        Singleton.getInstance().taxis.addAll(listOfTaxis);
     }
 
     private static Taxi newTaxi(String name, double longitude, double latitude) {

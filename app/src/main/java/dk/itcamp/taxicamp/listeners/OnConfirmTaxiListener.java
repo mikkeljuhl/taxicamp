@@ -20,7 +20,7 @@ public class OnConfirmTaxiListener implements DialogInterface.OnClickListener {
     private Taxi taxi;
     private Activity activity;
 
-    private static final int SPEED_OF_TAXI = 10;
+    private static final int SPEED_OF_TAXI = 500;
 
     public OnConfirmTaxiListener(View view, Taxi taxi, Activity activity) {
         this.view = view;

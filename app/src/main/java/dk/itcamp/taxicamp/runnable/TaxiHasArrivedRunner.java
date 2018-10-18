@@ -12,8 +12,12 @@ public class TaxiHasArrivedRunner implements Runnable {
         this.view = view;
     }
 
+    private String taxiIsWaitingForYouMessage() {
+        return "Din taxi venter på dig nu.";
+    }
+
     @Override
     public void run() {
-        Toast.makeText(this.view.getContext(), "Din taxi venter på dig nu.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this.view.getContext(), this.taxiIsWaitingForYouMessage(), Toast.LENGTH_LONG).show();
     }
 }

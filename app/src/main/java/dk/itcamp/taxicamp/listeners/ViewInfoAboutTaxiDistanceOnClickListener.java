@@ -20,7 +20,11 @@ public class ViewInfoAboutTaxiDistanceOnClickListener implements View.OnClickLis
     @Override
     public void onClick(View v) {
         Snackbar.make(v, this.textForClosestTaxi(), Snackbar.LENGTH_LONG)
-                .setAction("Bestil Taxi", new OrderTaxiOnClickListener(activity, TaxiUtility.findClosestTaxi())).show();
+                .setAction(this.orderTaxiText(), new OrderTaxiOnClickListener(activity, TaxiUtility.findClosestTaxi())).show();
+    }
+
+    private String orderTaxiText() {
+        return "Bestil Taxi";
     }
 
     private String textForClosestTaxi() {
