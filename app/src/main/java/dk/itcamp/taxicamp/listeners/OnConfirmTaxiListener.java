@@ -63,7 +63,7 @@ public class OnConfirmTaxiListener implements DialogInterface.OnClickListener {
         }
 
         handler.postDelayed(new TaxiHasArrivedRunner(this.view), (loops + 1) * OnConfirmTaxiListener.SPEED_OF_TAXI);
-        handler.postDelayed(new ResetTaxiPositionRunner(taxi), (loops + 100) * OnConfirmTaxiListener.SPEED_OF_TAXI);
+        handler.postDelayed(new ResetTaxiPositionRunner(taxi), (loops + 25) * OnConfirmTaxiListener.SPEED_OF_TAXI);
 
     }
 
