@@ -28,9 +28,13 @@ public class ViewInfoAboutTaxiDistanceOnClickListener implements View.OnClickLis
     }
 
     private String textForClosestTaxi() {
+        return "Den taxi der er tættest på er " + this.getDistanceToTaxi() + " km væk";
+    }
+
+    private BigDecimal getDistanceToTaxi() {
         Location currentLocation = Singleton.getInstance().currentLocation;
         BigDecimal distanceToTaxi  = BigDecimal.valueOf(TaxiUtility.findClosestTaxi().getLocation().distanceTo(currentLocation) / 1000);
-
-        return "Den taxi der er tættest på er " + distanceToTaxi.setScale(2, BigDecimal.ROUND_FLOOR) + " km væk";
+        return distanceToTaxi.setScale(2, BigDecimal.ROUND_FLOOR)
     }
+
 }
