@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.View;
 
+import java.math.BigDecimal;
+
 import dk.itcamp.taxicamp.R;
 import dk.itcamp.taxicamp.standard.Taxi;
 
@@ -11,10 +13,12 @@ public class OrderTaxiOnClickListener implements View.OnClickListener  {
 
     private Taxi taxi;
     private Activity activity;
+    private BigDecimal distance;
 
-    public OrderTaxiOnClickListener(Activity activity, Taxi taxi) {
+    public OrderTaxiOnClickListener(Activity activity, Taxi taxi, BigDecimal distance) {
         this.taxi = taxi;
         this.activity = activity;
+        this.distance = distance;
     }
 
     private String titleForAlertDialog() {
@@ -22,7 +26,8 @@ public class OrderTaxiOnClickListener implements View.OnClickListener  {
     }
 
     private String messageForAlertDialog() {
-        return "Er du helt sikker?";
+        return "Det er en distance på "+ this.distance + " og det koster 20 kr pr. kilometer, det vil sige totalt: "
+                + this.distance.multiply(BigDecimal.valueOf(20)).setScale(2, BigDecimal.ROUND_CEILING) + ",-";
     }
 
     @Override

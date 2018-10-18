@@ -20,11 +20,18 @@ public class ViewInfoAboutTaxiDistanceOnClickListener implements View.OnClickLis
     @Override
     public void onClick(View v) {
         Snackbar.make(v, this.textForClosestTaxi(), Snackbar.LENGTH_LONG)
-                .setAction(this.orderTaxiText(), new OrderTaxiOnClickListener(activity, TaxiUtility.findClosestTaxi())).show();
+                .setAction(this.orderTaxiText(), new OrderTaxiOnClickListener(activity, TaxiUtility.findClosestTaxi(), this.distance())).show();
     }
 
     private String orderTaxiText() {
         return "Bestil Taxi";
+    }
+
+    private BigDecimal distance() {
+        Location currentLocation = Singleton.getInstance().currentLocation;
+        BigDecimal distanceToTaxi  = BigDecimal.valueOf(TaxiUtility.findClosestTaxi().getLocation().distanceTo(currentLocation) / 1000);
+
+        return distanceToTaxi.setScale(2, BigDecimal.ROUND_CEILING);
     }
 
     private String textForClosestTaxi() {
