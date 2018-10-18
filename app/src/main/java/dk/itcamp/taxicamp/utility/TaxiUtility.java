@@ -29,8 +29,16 @@ public class TaxiUtility {
     public static void initializeTaxis() {
         ArrayList<Taxi> listOfTaxis = new ArrayList<>();
 
-        listOfTaxis.add(newTaxi("Taxi Driver 1", -122.043, 37.411));
-        listOfTaxis.add(newTaxi("Taxi Driver 2", -122.043, 37.420));
+        listOfTaxis.add(newTaxi("Jens Ole Pedersen", -122.043, 37.411));
+        listOfTaxis.add(newTaxi("Michael Hansen", -122.053, 37.421));
+        listOfTaxis.add(newTaxi("Lone Jensen", -122.023, 37.430));
+        listOfTaxis.add(newTaxi("Anni Britta Hansen", -122.013, 37.220));
+        listOfTaxis.add(newTaxi("Kasper Hansen", -122.043, 37.420));
+        listOfTaxis.add(newTaxi("Jonas Mikkelsen", -122.063, 37.320));
+        listOfTaxis.add(newTaxi("Ulrik Henriksen", -122.073, 37.422));
+        listOfTaxis.add(newTaxi("Earl Sweatshirt", -122.013, 37.422));
+        listOfTaxis.add(newTaxi("Frank Ocean", -122.042, 37.422));
+        listOfTaxis.add(newTaxi("Connor Youngblood", -122.043, 37.422));
 
         Singleton.getInstance().taxis.addAll(listOfTaxis);
     }
