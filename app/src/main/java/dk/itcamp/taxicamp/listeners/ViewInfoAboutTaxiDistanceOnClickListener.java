@@ -31,6 +31,9 @@ public class ViewInfoAboutTaxiDistanceOnClickListener implements View.OnClickLis
         Location currentLocation = Singleton.getInstance().currentLocation;
         BigDecimal distanceToTaxi  = BigDecimal.valueOf(TaxiUtility.findClosestTaxi().getLocation().distanceTo(currentLocation) / 1000);
 
-        return "Den taxi der er tættest på er " + distanceToTaxi.setScale(2, BigDecimal.ROUND_FLOOR) + " km væk";
+        // Average speed is 40 km/h
+        BigDecimal distanceInMinutes = distanceToTaxi.divide(BigDecimal.valueOf(50)).multiply(BigDecimal.valueOf(60));
+
+        return "Den taxi der er tættest på er " + distanceInMinutes.setScale(2, BigDecimal.ROUND_CEILING) + " minutter væk";
     }
 }
