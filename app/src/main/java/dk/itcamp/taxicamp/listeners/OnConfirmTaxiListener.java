@@ -49,11 +49,12 @@ public class OnConfirmTaxiListener implements DialogInterface.OnClickListener {
         BigDecimal latDifference = currentLat.subtract(taxiLat);
         BigDecimal lngDifference = currentLng.subtract(taxiLng);
 
-        if (latDifference.abs().compareTo(lngDifference.abs()) == 0) {
-            int amountOfLoops = this.findAmountOfLoops(latDifference);
-            this.initiateTaxiRunners(handler, amountOfLoops);
-        } else {
+        if (latDifference.abs().compareTo(lngDifference.abs()) == 1) {
+            this.initiateTaxiRunners(handler, this.findAmountOfLoops(latDifference));
+        } else if (latDifference.abs().compareTo(lngDifference.abs()) == -1) {
             this.initiateTaxiRunners(handler, this.findAmountOfLoops(lngDifference));
+        } else {
+            this.initiateTaxiRunners(handler, 0);
         }
     }
 
