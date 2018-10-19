@@ -21,12 +21,12 @@ public class Singleton {
 
             instance = new Singleton();
 
-            Location location = new Location("Current Location");
-            location.setLongitude(10.18764207);
-            location.setLatitude(56.17258293);
 
-            instance.currentLocation = location;
         }
+        Location location = new Location("Current Location");
+        location.setLongitude(10.18764207);
+        location.setLatitude(56.17258293);
+        instance.currentLocation = location;
 
         return instance;
     }
