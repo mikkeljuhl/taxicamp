@@ -49,6 +49,7 @@ public class OrderTaxi extends FragmentActivity implements OnMapReadyCallback {
                 return;
             }
             this.googleMap.setMyLocationEnabled(true);
+            this.permissionGranted();
         } else {
             // Permission was denied. Display an error message.
         }
@@ -60,10 +61,14 @@ public class OrderTaxi extends FragmentActivity implements OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
+            permissionGranted();
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
+    }
 
+
+    private void permissionGranted() {
         LocationTracker locationTracker = new LocationTracker(getApplicationContext(), this.googleMap);
         Singleton.getInstance().currentLocation = locationTracker.getCurrentLocation();
 

@@ -2,6 +2,7 @@ package dk.itcamp.taxicamp.listeners;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.location.Location;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
@@ -38,12 +39,14 @@ public class OnConfirmTaxiListener implements DialogInterface.OnClickListener {
         Handler handler = new Handler();
 
         // Extract latitude and longitude from currentLocation
-        BigDecimal currentLat = BigDecimal.valueOf(Singleton.getInstance().currentLocation.getLatitude());
-        BigDecimal currentLng = BigDecimal.valueOf(Singleton.getInstance().currentLocation.getLongitude());
+        Location currentLocation = Singleton.getInstance().currentLocation;
+        BigDecimal currentLat = BigDecimal.valueOf(currentLocation.getLatitude());
+        BigDecimal currentLng = BigDecimal.valueOf(currentLocation.getLongitude());
 
         // Extract latitude and longitude from taxi location
-        BigDecimal taxiLat = BigDecimal.valueOf(this.taxi.getLocation().getLatitude());
-        BigDecimal taxiLng = BigDecimal.valueOf(this.taxi.getLocation().getLongitude());
+        Location taxiLocation = this.taxi.getLocation();
+        BigDecimal taxiLat = BigDecimal.valueOf(taxiLocation.getLatitude());
+        BigDecimal taxiLng = BigDecimal.valueOf(taxiLocation.getLongitude());
 
         // Find the difference between the taxi location and the current loaction
         BigDecimal latDifference = currentLat.subtract(taxiLat);
