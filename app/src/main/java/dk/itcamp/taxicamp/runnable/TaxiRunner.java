@@ -39,9 +39,9 @@ public class TaxiRunner implements Runnable {
 
         if (!this.locationEquality(latest.getLongitude(), currentLocation.getLongitude())) {
             if (Math.abs(latest.getLongitude()) - Math.abs(currentLocation.getLongitude()) > 0) {
-                latest.setLongitude(latest.getLongitude() + 0.001);
-            } else {
                 latest.setLongitude(latest.getLongitude() - 0.001);
+            } else {
+                latest.setLongitude(latest.getLongitude() + 0.001);
             }
         }
 

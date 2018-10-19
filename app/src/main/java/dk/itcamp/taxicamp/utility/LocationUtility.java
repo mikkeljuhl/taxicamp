@@ -8,7 +8,11 @@ import java.text.DecimalFormat;
 
 public class LocationUtility {
     public static LatLng locationToLatLng(Location location) {
-        return new LatLng(location.getLatitude(), location.getLongitude());
+        if (location != null) {
+            return new LatLng(location.getLatitude(), location.getLongitude());
+        }
+
+        return null;
     }
 
     public static boolean locationEquals(Location location, Location other) {

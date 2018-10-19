@@ -23,9 +23,12 @@ public class ZoomMarker implements Runnable {
     public void run() {
         Location currentLocation = Singleton.getInstance().currentLocation;
         LatLng currentLatLngLocation = LocationUtility.locationToLatLng(currentLocation);
-        this.googleMap.addMarker(new MarkerOptions().position(currentLatLngLocation).title("Current location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LocationUtility.locationToLatLng(currentLocation)));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(LocationUtility.locationToLatLng(currentLocation)).zoom(14).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        if (currentLatLngLocation != null) {
+            this.googleMap.addMarker(new MarkerOptions().position(currentLatLngLocation).title("Current location"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(LocationUtility.locationToLatLng(currentLocation)));
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(LocationUtility.locationToLatLng(currentLocation)).zoom(14).build();
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
     }
 }

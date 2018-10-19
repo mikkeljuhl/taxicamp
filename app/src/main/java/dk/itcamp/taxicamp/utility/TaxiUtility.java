@@ -22,16 +22,15 @@ public class TaxiUtility {
             }
         }
 
-        System.out.println(closestTaxi.getLocation().getLongitude());
         return closestTaxi;
     }
 
     public static void initializeTaxis() {
         ArrayList<Taxi> listOfTaxis = new ArrayList<>();
 
-        listOfTaxis.add(newTaxi("Earl Sweatshirt", -122.123, 37.411));
-        listOfTaxis.add(newTaxi("Skepta", -122.14, 37.410));
-        listOfTaxis.add(newTaxi("Frank Ocean", -122.100, 37.421));
+        listOfTaxis.add(newTaxi("Earl Sweatshirt", 10.180, 56.170));
+        listOfTaxis.add(newTaxi("Skepta", 10.190, 56.180));
+        listOfTaxis.add(newTaxi("Frank Ocean", 10.200, 56.150));
 
         Singleton.getInstance().taxis.addAll(listOfTaxis);
     }
